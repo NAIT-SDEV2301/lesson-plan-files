@@ -1,4 +1,4 @@
-﻿namespace Lesson06.ConsoleApp.Guided
+﻿namespace Lesson05.ConsoleApp.Guided
 {
 	// PersonDemo_Guided.cs (properties + encapsulation)
 	// TODOs for students to complete during class.

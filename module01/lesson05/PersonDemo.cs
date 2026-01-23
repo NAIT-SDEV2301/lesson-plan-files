@@ -1,4 +1,4 @@
-﻿namespace Lesson06.ConsoleApp
+﻿namespace Lesson05.ConsoleApp
 {
 	// PersonDemo.cs (revised best-practice version)
 	// Encapsulation with private state + public properties.
