@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PointOfSaleSystem/PointOfSaleSystem.csproj" />
+  <Project Path="PointOfSaleTests/PointOfSaleTests.csproj" />
+</Solution>
