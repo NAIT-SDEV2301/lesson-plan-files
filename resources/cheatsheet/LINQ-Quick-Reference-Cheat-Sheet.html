@@ -1,0 +1,217 @@
+<!-- =====================================================
+  LINQ Quick Reference Cheat Sheet 
+===================================================== -->
+<section style="font-family: system-ui,Segoe UI,Roboto,Arial,sans-serif; line-height:1.5; max-width:900px;">
+  <header style="border-bottom:3px solid #0d6efd; margin-bottom:1rem;">
+    <h1 style="margin:0;">LINQ Quick Reference Cheat Sheet</h1>
+    <p style="margin:0; color:#555;">Common LINQ operators for collections and EF Core queries</p>
+  </header>
+
+  <aside style="background:#f8f9fa; border:1px solid #e3e6ea; border-radius:8px; padding:0.8rem;">
+    <strong>LINQ Overview</strong>
+    <ul>
+      <li><b>LINQ</b> = Language Integrated Query — query data using C# syntax.</li>
+      <li>Works with <code>IEnumerable&lt;T&gt;</code> (in-memory) and <code>IQueryable&lt;T&gt;</code> (database via EF Core).</li>
+      <li>Two styles:
+        <ul>
+          <li><b>Query syntax:</b> <code>from b in books where b.Pages &gt; 300 select b;</code></li>
+          <li><b>Method syntax:</b> <code>books.Where(b =&gt; b.Pages &gt; 300).Select(b =&gt; b);</code></li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <h2>1️⃣ Filtering and Projection</h2>
+  <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
+    <thead style="background:#f1f3f5;">
+      <tr>
+        <th style="padding:6px; border:1px solid #dee2e6;">Function</th>
+        <th style="padding:6px; border:1px solid #dee2e6;">Description</th>
+        <th style="padding:6px; border:1px solid #dee2e6;">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Where()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Filter elements by condition</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.Where(b =&gt; b.InStock)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Select()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Transform each element into a new form</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.Select(b =&gt; b.Title)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>SelectMany()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Flatten nested collections</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>orders.SelectMany(o =&gt; o.Items)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Distinct()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Remove duplicates</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>genres.Distinct()</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>2️⃣ Sorting</h2>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f1f3f5;">
+      <tr><th style="padding:6px;border:1px solid #dee2e6;">Function</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Description</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>OrderBy()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Sort ascending</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.OrderBy(b =&gt; b.Title)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>OrderByDescending()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Sort descending</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.OrderByDescending(b =&gt; b.Pages)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>ThenBy()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Secondary ascending sort</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.OrderBy(b =&gt; b.Genre).ThenBy(b =&gt; b.Title)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>3️⃣ Grouping and Aggregation</h2>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f1f3f5;">
+      <tr><th style="padding:6px;border:1px solid #dee2e6;">Function</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Description</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>GroupBy()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Group by key selector</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.GroupBy(b =&gt; b.Genre)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Count()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Count items (optional filter)</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.Count(b =&gt; b.InStock)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Sum()</code>, <code>Average()</code>, <code>Max()</code>, <code>Min()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Aggregate numeric values</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>orders.Sum(o =&gt; o.Total)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>4️⃣ Set Operations</h2>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f1f3f5;">
+      <tr><th style="padding:6px;border:1px solid #dee2e6;">Function</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Description</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Union()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Combine unique elements from two sequences</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>a.Union(b)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Intersect()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Common elements of both sequences</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>a.Intersect(b)</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Except()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Elements in first sequence not in second</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>a.Except(b)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>5️⃣ Joining and Navigation (EF Core)</h2>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f1f3f5;">
+      <tr><th style="padding:6px;border:1px solid #dee2e6;">Pattern</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Usage</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Join()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Join two collections on key</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>orders.Join(customers, o =&gt; o.CustomerId, c =&gt; c.Id, (o, c) =&gt; new { o.Id, c.Name })</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;">Navigation Property (EF)</td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Use related entity directly</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>db.Products.Select(p =&gt; new { p.ProductName, p.Category.CategoryName })</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>6️⃣ Execution & Conversion</h2>
+  <table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f1f3f5;">
+      <tr><th style="padding:6px;border:1px solid #dee2e6;">Function</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Purpose</th>
+          <th style="padding:6px;border:1px solid #dee2e6;">Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>ToList()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Execute and convert to list</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>var list = query.ToList();</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>First()</code>, <code>FirstOrDefault()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Get first element (or default/null)</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>var first = books.FirstOrDefault();</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Single()</code>, <code>SingleOrDefault()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Expect exactly one element</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>var result = users.Single(u =&gt; u.Id == 10);</code></td></tr>
+      <tr><td style="border:1px solid #dee2e6; padding:6px;"><code>Any()</code>, <code>All()</code></td>
+          <td style="border:1px solid #dee2e6; padding:6px;">Check existence or condition</td>
+          <td style="border:1px solid #dee2e6; padding:6px;"><code>books.Any(b =&gt; b.InStock)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>7️⃣ EF Core-Specific Extensions</h2>
+  <ul>
+    <li><code>ToQueryString()</code> → View SQL generated by a query.</li>
+    <li><code>AsNoTracking()</code> → Read-only queries (improves performance).</li>
+    <li><code>Include()</code> → Eagerly load related data.</li>
+    <li><code>FromSqlRaw()</code> → Run raw SQL queries.</li>
+    <li><code>Take()</code> / <code>Skip()</code> → Implement pagination.</li>
+  </ul>
+
+  <aside style="background:#f8f9fa;border-left:4px solid #0d6efd;padding:0.8rem;margin-top:1rem;">
+    💡 <strong>Tips:</strong>
+    <ul>
+      <li>LINQ to Objects executes in memory; LINQ to Entities executes on SQL Server.</li>
+      <li>Use <code>ToList()</code> only when you actually need the results (forces execution).</li>
+      <li>Keep filters (<code>Where</code>) and projections (<code>Select</code>) before <code>ToList()</code> for efficiency.</li>
+    </ul>
+  </aside>
+</section>
+
+<h2>8️⃣ Predicate Logic &amp; Boolean LINQ Operators</h2>
+<p>These LINQ functions evaluate conditions across collections and return <code>true</code> / <code>false</code> results.</p>
+
+<table style="width:100%; border-collapse:collapse;">
+  <thead style="background:#f1f3f5;">
+    <tr>
+      <th style="padding:6px;border:1px solid #dee2e6;">Method</th>
+      <th style="padding:6px;border:1px solid #dee2e6;">Purpose</th>
+      <th style="padding:6px;border:1px solid #dee2e6;">Example</th>
+      <th style="padding:6px;border:1px solid #dee2e6;">Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>Any()</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">Returns <code>true</code> if <strong>any</strong> element exists or satisfies a condition.</td>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>books.Any(b =&gt; b.InStock)</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">True if at least one book is in stock.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>All()</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">Returns <code>true</code> if <strong>all</strong> elements satisfy a condition.</td>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>books.All(b =&gt; b.Pages &gt; 100)</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">True if every book has more than 100 pages.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>Contains()</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">Checks whether a sequence contains a given value.</td>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>genres.Contains("Fantasy")</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">True if “Fantasy” appears in the list.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>SequenceEqual()</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">Compares two sequences element-by-element for equality.</td>
+      <td style="border:1px solid #dee2e6;padding:6px;"><code>a.SequenceEqual(b)</code></td>
+      <td style="border:1px solid #dee2e6;padding:6px;">True if both lists contain identical elements in order.</td>
+    </tr>
+  </tbody>
+</table>
+
+<aside style="background:#f8f9fa;border-left:4px solid #0d6efd;padding:0.8rem;margin-top:1rem;">
+  💡 <strong>Tips:</strong>
+  <ul>
+    <li><code>Any()</code> stops as soon as a match is found — more efficient than <code>Count() &gt; 0</code>.</li>
+    <li><code>All()</code> short-circuits on the first <em>false</em> element.</li>
+    <li>In EF Core, <code>Any()</code> and <code>All()</code> translate to SQL <code>EXISTS</code> and <code>NOT EXISTS</code> queries.</li>
+    <li><code>Contains()</code> becomes a SQL <code>IN</code> clause when used on database queries.</li>
+  </ul>
+</aside>
+
