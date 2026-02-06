@@ -1,4 +1,4 @@
-# Take-Home Practice (Lesson 17): EF Core Trainer & Pokémon (One-to-Many + Migrations)
+# Lesson 17 Take-Home Practice: EF Core Trainer & Pokémon (One-to-Many + Migrations)
 
 **Purpose:**
 Practice EF Core **relationships** and **migrations** by building a small console app that stores Trainers and their Pokémon.
