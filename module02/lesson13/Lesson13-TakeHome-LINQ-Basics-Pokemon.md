@@ -108,7 +108,7 @@ For each task:
 11. Names + Speed (as a single string like `"Pikachu - 90"`) for Pokémon with `Speed >= 90`
 12. Names of Pokémon that are **Water type** with `Total >= 500`
 
-### D. “Read the Query” (Explain in plain English)
+### D. "Read the Query" (Explain in plain English)
 
 For each query below, write a sentence describing:
 
@@ -127,7 +127,7 @@ var q3 = pokedex.Where(p => p.Type2 != null).Select(p => p.Name);
 
 You’re done when you can confidently say:
 
-* “This query returns `IEnumerable<Pokemon>` / `IEnumerable<string>` / `IEnumerable<int>`”
+* "This query returns `IEnumerable<Pokemon>` / `IEnumerable<string>` / `IEnumerable<int>`"
 * and explain it without running it.
 
 ---

@@ -149,7 +149,7 @@ var speedBuckets =
         .Select(g => new { Bucket = g.Key, Count = g.Count() });
 ```
 
-### F. Stretch (Optional, still Lesson 14-safe)
+### F. Stretch (Optional)
 
 15. Filter to only Pokémon with `Total >= 500`, then group by `Type1`, then count.
 
