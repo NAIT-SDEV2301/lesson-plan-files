@@ -31,7 +31,6 @@
 
 			// --- STEP 1: Filter (Where) -------------------------------
 			// Goal: Keep only students with Grade >= 70 (passing).
-			// Method syntax (start here for consistency with lambda expressions later):
 			var passing = students.Where(s => s.Grade >= 70);
 
 			Console.WriteLine("\nSTEP 1: Passing students (Grade >= 70):");
@@ -75,7 +74,7 @@
 			Console.WriteLine("\nEnd of teaching demo. See LinqDemo_Guided.cs for practice tasks and LinqDemo_Solution.cs for answers.");
 		}
 
-		// Small helper to create natural pause points in class.
+		// Small helper to create natural pause points.
 		private static void Pause(string prompt)
 		{
 			Console.WriteLine($"\n— {prompt}");
