@@ -1,0 +1,45 @@
+﻿@page "/roll-a-die"
+@rendermode InteractiveServer
+
+<h3>Roll a Die</h3>
+
+<label>Enter the size of the die:</label>
+<input @bind="UserInput"/>
+<button @onclick="RollDie">Roll</button>
+@if (ShowError)
+{
+    <p style="color: red;">@ErrorMessage</p>
+}
+else if (DieRoll > 0)
+{
+    <p style="color: darkgreen;">You rolled: @DieRoll</p>
+}
+
+@code {
+    private bool ShowError = false;
+    private string ErrorMessage = "";
+    private string UserInput = "";
+    private int DieRoll = 0;
+    private void RollDie()
+    {
+        ShowError = false;
+        bool success = int.TryParse(UserInput, out int maxRoll);
+        if (!success)
+        {
+            ShowError = true;
+            ErrorMessage = "That is not a valid integer.";
+            DieRoll = 0;
+        }
+        else if (maxRoll < 4)
+        {
+            ShowError = true;
+            ErrorMessage = "That number is too small.";
+            DieRoll = 0;
+        }
+        else
+        {
+            Random random = new Random();
+            DieRoll = random.Next(1, maxRoll + 1);
+        }
+    }
+}
