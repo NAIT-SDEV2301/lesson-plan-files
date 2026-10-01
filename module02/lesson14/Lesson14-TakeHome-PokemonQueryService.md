@@ -1,11 +1,13 @@
-# Lesson 13 Take-Home Follow-Up: Pokémon Query Service + Unit Tests (Starter)
+# Lesson 14 Take-Home Follow-Up: Pokémon Query Service + Unit Tests
 
 ## Goal
+
 Refactor your Lesson 13 Pokémon LINQ queries so they live inside a **service class** (methods that return results).
 Then practice writing a few **xUnit tests** to verify those methods.
 
 ✅ You are NOT expected to finish every method.  
 ✅ The goal is to learn the workflow:
+
 - write a method that returns data
 - add null guards
 - write tests that prove it works
@@ -16,8 +18,7 @@ Then practice writing a few **xUnit tests** to verify those methods.
 
 A solution with **two projects**:
 
-```
-
+```text
 PokemonQuery/
 ├─ PokemonQuery.Domain/
 │   ├─ Pokemon.cs
@@ -34,6 +35,7 @@ PokemonQuery/
 ---
 
 ## Rules (Important)
+
 - Service methods must be **pure** (no printing, no mutation).
 - Methods must return results.
 - Every method must guard against `null` input:
@@ -135,6 +137,7 @@ public IEnumerable<(string Type1, int Count)> CountByType1(IEnumerable<Pokemon> 
 ## Step 3 — Starter Unit Tests (Tests Project)
 
 Create `PokemonQueryServiceTests.cs`.
+Test naming convention: Member_Scenario_ExpectedResult
 
 ### Your job today:
 
@@ -156,7 +159,7 @@ public void GetNames_NullPokedex_ThrowsArgumentNullException()
 
 ```csharp
 [Fact]
-public void GetWaterTypes_ReturnsOnlyWaterType1()
+public void GetWaterTypes_ValidPokedex_ReturnsOnlyWaterType1()
 {
     var pokedex = PokemonData.CreatePokedex();
     var service = new PokemonQueryService();
@@ -174,7 +177,7 @@ This test checks that the returned results contain expected counts.
 
 ```csharp
 [Fact]
-public void CountByType1_ReturnsExpectedCounts()
+public void CountByType1_ValidPokedex_ReturnsExpectedCounts()
 {
     var pokedex = PokemonData.CreatePokedex();
     var service = new PokemonQueryService();
