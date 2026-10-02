@@ -137,7 +137,7 @@ public IEnumerable<(string Type1, int Count)> CountByType1(IEnumerable<Pokemon> 
 ## Step 3 — Starter Unit Tests (Tests Project)
 
 Create `PokemonQueryServiceTests.cs`.
-Test naming convention: Member_Scenario_ExpectedResult
+**Test naming convention**: `Member_Scenario_ExpectedResult`
 
 ### Your job today:
 
